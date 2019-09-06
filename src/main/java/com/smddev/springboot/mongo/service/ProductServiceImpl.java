@@ -20,11 +20,6 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void createProducts(List<Product> products) {
-        dao.saveAll(products);
-    }
-
-    @Override
     public Optional<Product> get(String id) {
         return dao.findById(id);
     }
@@ -37,11 +32,6 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<String> getAllNames() {
         return productsToStrings(dao.findAll());
-    }
-
-    @Override
-    public List<String> filterByName(String name) {
-        return productsToStrings(dao.findProductsByName(name));
     }
 
     @Override
@@ -67,12 +57,15 @@ public class ProductServiceImpl implements ProductService {
         if (field.isEmpty()) {
             return Collections.emptyList();
         }
+        if (field.equals("name")) {
+            return productsToStrings(dao.findProductsByName(value));
+        }
         List<String> productsNamesList = new ArrayList<>();
         Map<String, String> params;
         for (Product product : products) {
             params = new HashMap<>(product.getParameters());
             String curValue = params.get(field);
-            if ((curValue != null) && (curValue.equalsIgnoreCase(value))) {
+            if ((curValue != null) && (curValue.toLowerCase().contains(value.toLowerCase()))) {
                 productsNamesList.add(product.getName());
             }
         }

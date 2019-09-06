@@ -9,15 +9,11 @@ import java.util.Optional;
 public interface ProductService {
     void create(Product product);
 
-    void createProducts(List<Product> products);
-
     Optional<Product> get(String id);
 
     Collection<Product> getAll();
 
     List<String> getAllNames();
-
-    List<String> filterByName(String name);
 
     List<String> filterByField(String field, String value);
 

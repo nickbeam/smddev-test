@@ -26,7 +26,7 @@ public class ProductController {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @PostMapping(value = "/create", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Product> create(@RequestBody Product product) {
         logger.debug("Creating new product");
         service.create(product);
@@ -37,20 +37,8 @@ public class ProductController {
         return ResponseEntity.created(uriOfNewResource).body(product);
     }
 
-    @PostMapping(value = "/createall", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void createAll(@RequestBody List<Product> products) {
-        logger.debug("Creating new products");
-        service.createProducts(products);
-    }
-
     @GetMapping(value = "/getall")
-    public Collection<Product> getAll() {
-        logger.debug("Getting all products");
-        return service.getAll();
-    }
-
-    @GetMapping(value = "/getallnames")
-    public List<String> getAllNames() {
+    public List<String> getAll() {
         logger.debug("Getting all products names");
         return service.getAllNames();
     }
@@ -61,12 +49,6 @@ public class ProductController {
         return service.get(id);
     }
 
-    @GetMapping(value = "/getbyname/{product-name}")
-    public List<String> getByName(@PathVariable(value = "product-name") String name) {
-        logger.debug("Getting product by name = {}", name);
-        return service.filterByName(name);
-    }
-
     @GetMapping(value = "/filter")
     public List<String> filterByField(
             @RequestParam() String field,
@@ -75,14 +57,14 @@ public class ProductController {
         return service.filterByField(field, value);
     }
 
-    @PutMapping(value = "/update/{product-id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/{product-id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public void updateProduct(@PathVariable(value = "product-id") String id, @RequestBody Product product) {
         logger.debug("Updating product with id = {}", id);
         product.setId(id);
         service.update(product);
     }
 
-    @DeleteMapping(value = "/delete/{product-id}")
+    @DeleteMapping(value = "/{product-id}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void deleteById(@PathVariable(value = "product-id") String id) {
         logger.debug("Deleting product with id = {}", id);
