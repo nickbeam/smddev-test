@@ -15,7 +15,7 @@ public class ProductServiceImpl implements ProductService {
     ProductDao dao;
 
     @Override
-    public void createProduct(Product product) {
+    public void create(Product product) {
         dao.save(product);
     }
 
@@ -25,17 +25,17 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Optional<Product> findProductById(String id) {
+    public Optional<Product> get(String id) {
         return dao.findById(id);
     }
 
     @Override
-    public Collection<Product> getAllProducts() {
+    public Collection<Product> getAll() {
         return dao.findAll();
     }
 
     @Override
-    public List<String> getAllProductsNames() {
+    public List<String> getAllNames() {
         return productsToStrings(dao.findAll());
     }
 
@@ -46,22 +46,17 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<String> filterByField(String field, String value) {
-        return getProductNames(getAllProducts(), field, value);
+        return getProductNames(getAll(), field, value);
     }
 
     @Override
-    public void updateProduct(Product product) {
+    public void update(Product product) {
         dao.save(product);
     }
 
     @Override
-    public void deleteProductById(String id) {
+    public void delete(String id) {
         dao.deleteById(id);
-    }
-
-    @Override
-    public void deleteAllProducts() {
-        dao.deleteAll();
     }
 
     private List<String> productsToStrings(List<Product> products) {

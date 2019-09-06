@@ -7,23 +7,21 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ProductService {
-    void createProduct(Product product);
+    void create(Product product);
 
     void createProducts(List<Product> products);
 
-    Optional<Product> findProductById(String id);
+    Optional<Product> get(String id);
 
-    Collection<Product> getAllProducts();
+    Collection<Product> getAll();
 
-    List<String> getAllProductsNames();
+    List<String> getAllNames();
 
     List<String> filterByName(String name);
 
     List<String> filterByField(String field, String value);
 
-    void updateProduct(Product product);
+    void update(Product product);
 
-    void deleteProductById(String id);
-
-    void deleteAllProducts();
+    void delete(String id);
 }

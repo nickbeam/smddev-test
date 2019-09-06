@@ -19,7 +19,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping(value = "/api/product")
 public class ProductController {
-    private static final String REST_URL = "/api/product/get";
+    private static final String REST_URL = "/api/product";
 
     @Autowired
     ProductService service;
@@ -29,7 +29,7 @@ public class ProductController {
     @PostMapping(value = "/create", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Product> create(@RequestBody Product product) {
         logger.debug("Creating new product");
-        service.createProduct(product);
+        service.create(product);
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path(REST_URL + "/{id}")
                 .buildAndExpand(product.getId()).toUri();
@@ -46,19 +46,19 @@ public class ProductController {
     @GetMapping(value = "/getall")
     public Collection<Product> getAll() {
         logger.debug("Getting all products");
-        return service.getAllProducts();
+        return service.getAll();
     }
 
     @GetMapping(value = "/getallnames")
     public List<String> getAllNames() {
         logger.debug("Getting all products names");
-        return service.getAllProductsNames();
+        return service.getAllNames();
     }
 
-    @GetMapping(value = "/get/{product-id}")
+    @GetMapping(value = "/{product-id}")
     public Optional<Product> getById(@PathVariable(value = "product-id") String id) {
         logger.debug("Getting product by id = {}", id);
-        return service.findProductById(id);
+        return service.get(id);
     }
 
     @GetMapping(value = "/getbyname/{product-name}")
@@ -79,20 +79,13 @@ public class ProductController {
     public void updateProduct(@PathVariable(value = "product-id") String id, @RequestBody Product product) {
         logger.debug("Updating product with id = {}", id);
         product.setId(id);
-        service.updateProduct(product);
+        service.update(product);
     }
 
     @DeleteMapping(value = "/delete/{product-id}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void deleteById(@PathVariable(value = "product-id") String id) {
         logger.debug("Deleting product with id = {}", id);
-        service.deleteProductById(id);
-    }
-
-    @DeleteMapping(value = "/deleteall")
-    @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public void deleteAll() {
-        logger.debug("Deleted all products");
-        service.deleteAllProducts();
+        service.delete(id);
     }
 }
