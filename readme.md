@@ -1,18 +1,20 @@
-INSTALL:
+# Test project for SmartDesign.
 
-docker pull mongo
-docker pull dvininnick/spring-boot-mongo
-docker run -p 27017:27017 -d mongo
-docker run -p 8181:8181 -d dvininnick/spring-boot-mongo
+## INSTALL:
+
+- docker pull mongo
+- docker pull dvininnick/spring-boot-mongo
+- docker run -p 27017:27017 -d mongo
+- docker run -p 8181:8181 -d dvininnick/spring-boot-mongo
 
 
-REST API DOCUMENTATION.
+## REST API DOCUMENTATION.
 
-Create new product:
+### Create new product:
 
-POST http://localhost:8181/api/product
+- POST http://localhost:8181/api/product
 
-{
+>{
 	"id": "124",
 	"name": "Apple iPhone 7 Plus",
 	"description": "Brand new",
@@ -24,33 +26,33 @@ POST http://localhost:8181/api/product
 	}
 }
 
-Get product by ID:
+### Get product by ID:
 
-GET	http://localhost:8181/api/product/124
-
-
-Get all products names:
-
-GET http://localhost:8181/api/product/
+- GET	http://localhost:8181/api/product/124
 
 
-Get filtered by filed and value product names:
+### Get all product names:
 
-GET http://localhost:8181/api/product/filter?field=color&value=silver
-
-GET http://localhost:8181/api/product/filter?field=currency&value=rub
+- GET http://localhost:8181/api/product/
 
 
-Get filtered by name product names:
+### Get filtered by filed and value product names:
 
-GET http://localhost:8181/api/product/filter?field=name&value=iphone
+- GET http://localhost:8181/api/product/filter?field=color&value=silver
+
+- GET http://localhost:8181/api/product/filter?field=currency&value=rub
 
 
-Update product by ID:
+### Get filtered by name product names:
 
-PUT http://localhost:8181/api/product/124
+- GET http://localhost:8181/api/product/filter?field=name&value=iphone
 
-{
+
+### Update product by ID:
+
+- PUT http://localhost:8181/api/product/124
+
+>{
 	"name": "Apple iPhone XR",
 	"description": "Refurbished",
 	"parameters": 
@@ -62,6 +64,6 @@ PUT http://localhost:8181/api/product/124
 }
 
 
-Delete product by ID:
+### Delete product by ID:
 
-DELETE http://localhost:8181/api/product/124
+- DELETE http://localhost:8181/api/product/124
