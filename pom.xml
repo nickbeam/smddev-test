@@ -2,20 +2,24 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.smddev.springboot.mongo</groupId>
-    <artifactId>SpringbootMongo</artifactId>
-    <packaging>war</packaging>
+    <groupId>com.dvininnick</groupId>
+    <artifactId>spring-boot-mongo</artifactId>
+    <packaging>jar</packaging>
     <version>0.1-SNAPSHOT</version>
 
-    <name>SpringbootMongo Maven Webapp</name>
-    <url>http://maven.apache.org</url>
+    <name>spring-boot-mongo</name>
 
     <!-- spring boot parent dependency jar -->
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.1.7.RELEASE</version>
+        <relativePath /><!-- lookup parent from repository -->
     </parent>
+
+    <properties>
+        <java.version>1.8</java.version>
+    </properties>
 
     <dependencies>
         <!-- spring boot web mvc jar -->
@@ -31,6 +35,34 @@
     </dependencies>
 
     <build>
-        <finalName>SpringbootMongo</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>dockerfile-maven-plugin</artifactId>
+                <version>1.4.12</version>
+                <configuration>
+                    <repository>dvininnick/${project.artifactId}</repository>
+                    <tag>latest</tag>
+                    <buildArgs>
+                        <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
+                    </buildArgs>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>default</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>build</goal>
+                            <goal>push</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+        <finalName>spring-boot-mongo</finalName>
     </build>
 </project>
