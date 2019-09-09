@@ -1,20 +1,22 @@
 # Test project for Smart Design.
 
-## INSTALL:
-
+## Installation:
+```bash
 - docker pull mongo
 - docker pull dvininnick/spring-boot-mongo
 - docker run -p 27017:27017 -d mongo
 - docker run -p 8181:8181 -d dvininnick/spring-boot-mongo
+```
 
 
-## REST API DOCUMENTATION.
+## REST API Documentation:
 
 ### Create new product:
 
 - POST http://localhost:8181/api/product
 
->{
+```json
+{
 	"id": "124",
 	"name": "Apple iPhone 7 Plus",
 	"description": "Brand new",
@@ -25,6 +27,7 @@
 		"currency": "RUB"
 	}
 }
+```
 
 ### Get product by ID:
 
@@ -52,7 +55,8 @@
 
 - PUT http://localhost:8181/api/product/124
 
->{
+```json
+{
 	"name": "Apple iPhone XR",
 	"description": "Refurbished",
 	"parameters": 
@@ -62,6 +66,7 @@
 		"currency": "RUB"
 	}
 }
+```
 
 
 ### Delete product by ID:
