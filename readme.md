@@ -1,4 +1,4 @@
-# Test project for SmartDesign.
+# Test project for Smart Design.
 
 ## INSTALL:
 
