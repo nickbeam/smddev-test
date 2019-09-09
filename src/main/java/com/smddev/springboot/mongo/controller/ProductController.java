@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,13 +43,13 @@ public class ProductController {
     }
 
     @GetMapping(value = "/{product-id}")
-    public Optional<Product> getById(@PathVariable(value = "product-id") String id) {
+    public Optional<Product> get(@PathVariable(value = "product-id") String id) {
         logger.debug("Getting product by id = {}", id);
         return service.get(id);
     }
 
     @GetMapping(value = "/filter")
-    public List<String> filterByField(
+    public List<String> filter(
             @RequestParam() String field,
             @RequestParam() String value) {
         logger.debug("Getting product by field = {} with value = {}", field, value);
@@ -58,7 +57,7 @@ public class ProductController {
     }
 
     @PutMapping(value = "/{product-id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void updateProduct(@PathVariable(value = "product-id") String id, @RequestBody Product product) {
+    public void update(@PathVariable(value = "product-id") String id, @RequestBody Product product) {
         logger.debug("Updating product with id = {}", id);
         product.setId(id);
         service.update(product);
@@ -66,7 +65,7 @@ public class ProductController {
 
     @DeleteMapping(value = "/{product-id}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public void deleteById(@PathVariable(value = "product-id") String id) {
+    public void delete(@PathVariable(value = "product-id") String id) {
         logger.debug("Deleting product with id = {}", id);
         service.delete(id);
     }
