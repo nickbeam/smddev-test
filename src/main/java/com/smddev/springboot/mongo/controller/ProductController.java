@@ -36,14 +36,14 @@ public class ProductController {
         return ResponseEntity.created(uriOfNewResource).body(product);
     }
 
-    @GetMapping(value = "/getall")
+    @GetMapping(value = "/")
     public List<String> getAll() {
         logger.debug("Getting all products names");
         return service.getAllNames();
     }
 
-    @GetMapping(value = "/{product-id}")
-    public Optional<Product> get(@PathVariable(value = "product-id") String id) {
+    @GetMapping(value = "/{id}")
+    public Optional<Product> get(@PathVariable(value = "id") String id) {
         logger.debug("Getting product by id = {}", id);
         return service.get(id);
     }
@@ -56,16 +56,16 @@ public class ProductController {
         return service.filterByField(field, value);
     }
 
-    @PutMapping(value = "/{product-id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void update(@PathVariable(value = "product-id") String id, @RequestBody Product product) {
+    @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void update(@PathVariable(value = "id") String id, @RequestBody Product product) {
         logger.debug("Updating product with id = {}", id);
         product.setId(id);
         service.update(product);
     }
 
-    @DeleteMapping(value = "/{product-id}")
+    @DeleteMapping(value = "/{id}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable(value = "product-id") String id) {
+    public void delete(@PathVariable(value = "id") String id) {
         logger.debug("Deleting product with id = {}", id);
         service.delete(id);
     }
