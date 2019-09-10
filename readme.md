@@ -1,4 +1,4 @@
-# Test project for Smart Design.
+# Spring boot REST with MongoDB - Test Project.
 
 ## Installation:
 ```bash
