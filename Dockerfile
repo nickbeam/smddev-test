@@ -7,4 +7,4 @@ EXPOSE 8181
 ADD target/spring-boot-mongo.jar spring-boot-mongo.jar
 
 # Run the jar file
-ENTRYPOINT ["java","-jar","spring-boot-mongo.jar"]
+ENTRYPOINT ["java","-Dspring.data.mongodb.uri=mongodb://mongodb/smddev-test", "-jar","spring-boot-mongo.jar"]
