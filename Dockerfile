@@ -1,10 +1,13 @@
-# Start with a base image containing Java runtime
+FROM maven:3.5.2-jdk-8-alpine AS MAVEN_TOOL_CHAIN
+COPY pom.xml /tmp/
+COPY src /tmp/src/
+WORKDIR /tmp/
+RUN mvn package
+
 FROM java:8
 
-# Make port 8181 available to the world outside this container
+COPY --from=MAVEN_TOOL_CHAIN /tmp/target/spring-boot-mongo*.jar spring-boot-mongo.jar
+
 EXPOSE 8181
 
-ADD target/spring-boot-mongo.jar spring-boot-mongo.jar
-
-# Run the jar file
 ENTRYPOINT ["java","-Dspring.data.mongodb.uri=mongodb://mongodb/smddev-test", "-jar","spring-boot-mongo.jar"]
