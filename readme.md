@@ -1,4 +1,4 @@
-# Spring boot REST with MongoDB - Test Project. [![Build Status](https://travis-ci.org/nickbeam/smddev-test.png?branch=master)](https://travis-ci.org/nickbeam/smddev-test)
+# Spring boot REST with MongoDB - Test Project. [![Codacy Badge](https://api.codacy.com/project/badge/Grade/13b8a8595aed46bdad946620267d65d4)](https://www.codacy.com/manual/nickbeam/smddev-test?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=nickbeam/smddev-test&amp;utm_campaign=Badge_Grade) [![Build Status](https://travis-ci.org/nickbeam/smddev-test.png?branch=master)](https://travis-ci.org/nickbeam/smddev-test)
 
 ## Installation:
 `git clone https://github.com/nickbeam/smddev-test.git`
